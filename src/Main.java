@@ -31,7 +31,7 @@ public class Main {
 
                                 Scanner scanner = new Scanner(System.in);
 
-                                // Pedir al usuario que ingrese el DNI y validar el formato
+                                //Llama al Metodo para pedir el dni y validarlo
                                 String dni;
                                 do {
                                     dni = pedirDNIAUsuario(scanner);
@@ -78,23 +78,48 @@ public class Main {
             }
 
 
+    /**
+     * Validar el formato del DNI
+     *
+     * @param dni Numero ingresado
+     *
+     * @return DNI valido o invalido
+     */
     public static boolean validarFormatoDNI(String dni) {
         return dni.matches("[0-9]{8}[a-zA-Z]");
     }
 
-    // Método para pedir el DNI al usuario
+    /**
+     * Pide el DNI al usuario
+     *
+     * @param input Capta el numero ingresado
+     *
+     * @return Capta el DNI ingresado
+     */
     public static String pedirDNIAUsuario(Scanner input) {
         System.out.println("Ingrese el DNI del cliente (8 dígitos seguidos de 1 letra):");
         return input.nextLine();
     }
 
-    // Método para pedir el nombre al usuario
+    /**
+     * Pide el nombre al usuario
+     *
+     * @param input Capta el nombre ingresado
+     *
+     * @return Capta el Nombre del usuario ingresado
+     */
     public static String pedirNombreAUsuario(Scanner input) {
         System.out.println("Ingrese el nombre del nuevo cliente:");
         return input.nextLine();
     }
 
-    // Método para agregar un nuevo cliente al array
+    /**
+     * Completa el array con los datos del usuario: nombre y DNI
+     *
+     * @param clientes Matriz de clientes: nombres y Dni
+     * @param dni Numero de dni captado
+     * @param nombre Numero de nombre captado
+     */
     public static void agregarCliente(String[][] clientes, String dni, String nombre) {
         for (int i = 0; i < clientes.length; i++) {
             if (clientes[i][0] == null && clientes[i][1] == null) {
@@ -105,7 +130,12 @@ public class Main {
         }
     }
 
-    // Método para mostrar todos los clientes almacenados
+    /**
+     * Recorre la Matriz de Clientes, y los muestra
+     *
+     * @param clientes Matriz con todos los datos del cliente
+     */
+
     public static void mostrarClientes(String[][] clientes) {
         System.out.println("Lista de clientes:");
         for (int i = 0; i < clientes.length; i++) {
