@@ -4,14 +4,11 @@ public class Main {
 
             Scanner input = new Scanner(System.in);
 
-
             public static void main(String[] args) {
 
                 Main main = new Main();
                 main.init();
             }
-
-
 
             public void init(){
                 int menuItem = 0;
@@ -20,17 +17,38 @@ public class Main {
                     System.out.println("[1] Dar de alta al cliente");
                     System.out.println("[2] Dar de alta a nuevo mecanico");
                     System.out.println("[3] Introducir nuevo Vehiculo");
-                    System.out.println("[4] Crear fichad e nueva reparacion");
+                    System.out.println("[4] Crear fichas e nueva reparacion");
                     System.out.println("[5] Salir");
                     System.out.println("Selecciona una opcion: ");
 
                     if (input.hasNextInt()){
                         menuItem = input.nextInt();
                         switch (menuItem){
+
                             case 1:
-                                System.out.println("Has dado de alta a un nuevo cliente");
-                                //insert code here
-                                break;
+                                // Declaración del array de clientes
+                                String[][] clientes = new String[100][2];
+
+                                Scanner scanner = new Scanner(System.in);
+
+                                // Pedir al usuario que ingrese el DNI y validar el formato
+                                String dni;
+                                do {
+                                    dni = pedirDNIAUsuario(scanner);
+                                    if (!validarFormatoDNI(dni)) {
+                                        System.out.println("El formato del DNI no es válido. Debe ser de 8 dígitos seguidos de 1 letra.");
+                                    }
+                                } while (!validarFormatoDNI(dni));
+
+                                // Pedir al usuario que ingrese el nombre del nuevo cliente
+                                String nuevoNombre = pedirNombreAUsuario(scanner);
+
+                                // Agregar el nuevo cliente al array
+                                agregarCliente(clientes, dni, nuevoNombre);
+
+                                // Mostrar todos los clientes almacenados
+                                mostrarClientes(clientes);
+
                             case 2:
                                 System.out.println("Has dado de alta a un nuevo mecanico");
                                 //insert code here
@@ -59,17 +77,44 @@ public class Main {
 
             }
 
-            //insert code here
 
-        }
-
-
-
-
-
-
-
-
-
+    public static boolean validarFormatoDNI(String dni) {
+        return dni.matches("[0-9]{8}[a-zA-Z]");
     }
+
+    // Método para pedir el DNI al usuario
+    public static String pedirDNIAUsuario(Scanner input) {
+        System.out.println("Ingrese el DNI del cliente (8 dígitos seguidos de 1 letra):");
+        return input.nextLine();
+    }
+
+    // Método para pedir el nombre al usuario
+    public static String pedirNombreAUsuario(Scanner input) {
+        System.out.println("Ingrese el nombre del nuevo cliente:");
+        return input.nextLine();
+    }
+
+    // Método para agregar un nuevo cliente al array
+    public static void agregarCliente(String[][] clientes, String dni, String nombre) {
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i][0] == null && clientes[i][1] == null) {
+                clientes[i][0] = dni;
+                clientes[i][1] = nombre;
+                break;
+            }
+        }
+    }
+
+    // Método para mostrar todos los clientes almacenados
+    public static void mostrarClientes(String[][] clientes) {
+        System.out.println("Lista de clientes:");
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i][0] != null && clientes[i][1] != null) {
+                System.out.println("Cliente " + (i + 1) + ": DNI = " + clientes[i][0] + ", Nombre = " + clientes[i][1]);
+            } else {
+                break; // Detener la iteración si se alcanza una posición vacía
+            }
+        }
+    }
+
 }
