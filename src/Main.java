@@ -29,19 +29,19 @@ public class Main {
                                 // Declaración del array de clientes
                                 String[][] clientes = new String[100][2];
 
-                                Scanner scanner = new Scanner(System.in);
+                                Scanner Scanner = new Scanner(System.in);
 
                                 //Llama al Metodo para pedir el dni y validarlo
                                 String dni;
                                 do {
-                                    dni = pedirDNIAUsuario(scanner);
+                                    dni = pedirDNIAUsuario(Scanner);
                                     if (!validarFormatoDNI(dni)) {
                                         System.out.println("El formato del DNI no es válido. Debe ser de 8 dígitos seguidos de 1 letra.");
                                     }
                                 } while (!validarFormatoDNI(dni));
 
                                 // Pedir al usuario que ingrese el nombre del nuevo cliente
-                                String nuevoNombre = pedirNombreAUsuario(scanner);
+                                String nuevoNombre = pedirNombreAUsuario(Scanner);
 
                                 // Agregar el nuevo cliente al array
                                 agregarCliente(clientes, dni, nuevoNombre);
@@ -49,10 +49,19 @@ public class Main {
                                 // Mostrar todos los clientes almacenados
                                 mostrarClientes(clientes);
 
-                            case 2:
-                                System.out.println("Has dado de alta a un nuevo mecanico");
-                                //insert code here
                                 break;
+
+                            case 2:
+
+                                // Declaración del array de clientes
+                                String[][] mecanicos = new String[100][3];
+
+                                Scanner = new Scanner(System.in);
+
+                                altaMecanico(Scanner, mecanicos);
+
+                                break;
+
                             case 3:
                                 System.out.println("Has dado de alta a un nuevo vehiculo");
                                 //insert code here
@@ -78,6 +87,8 @@ public class Main {
             }
 
 
+    //CASE 1: DAR DE ALTA NUEVO EMPLEADO
+
     /**
      * Validar el formato del DNI
      *
@@ -92,25 +103,25 @@ public class Main {
     /**
      * Pide el DNI al usuario
      *
-     * @param input Capta el numero ingresado
+     * @param dni1 Capta el numero ingresado
      *
      * @return Capta el DNI ingresado
      */
-    public static String pedirDNIAUsuario(Scanner input) {
+    public static String pedirDNIAUsuario(Scanner dni1) {
         System.out.println("Ingrese el DNI del cliente (8 dígitos seguidos de 1 letra):");
-        return input.nextLine();
+        return dni1.nextLine();
     }
 
     /**
      * Pide el nombre al usuario
      *
-     * @param input Capta el nombre ingresado
+     * @param nombre Capta el nombre ingresado
      *
      * @return Capta el Nombre del usuario ingresado
      */
-    public static String pedirNombreAUsuario(Scanner input) {
+    public static String pedirNombreAUsuario(Scanner nombre) {
         System.out.println("Ingrese el nombre del nuevo cliente:");
-        return input.nextLine();
+        return nombre.nextLine();
     }
 
     /**
@@ -135,7 +146,6 @@ public class Main {
      *
      * @param clientes Matriz con todos los datos del cliente
      */
-
     public static void mostrarClientes(String[][] clientes) {
         System.out.println("Lista de clientes:");
         for (int i = 0; i < clientes.length; i++) {
@@ -143,6 +153,74 @@ public class Main {
                 System.out.println("Cliente " + (i + 1) + ": DNI = " + clientes[i][0] + ", Nombre = " + clientes[i][1]);
             } else {
                 break; // Detener la iteración si se alcanza una posición vacía
+            }
+        }
+    }
+
+
+
+    //CASE 2: DAR DE ALTA NUEVO MECANICO
+
+    public static void altaMecanico(Scanner scanner, String[][] mecanicos) {
+
+        String codigoEmpleado = pedirCodigoEmpleado(scanner, mecanicos);
+        String nombreMecanico = pedirNombreMecanico(scanner);
+        String estadoMecanico = pedirEstadoMecanico(scanner);
+        guardarMecanico(mecanicos, codigoEmpleado, nombreMecanico, estadoMecanico);
+    }
+
+    public static String pedirCodigoEmpleado(Scanner scanner, String[][] mecanicos) {
+        String codigoEmpleado;
+        do {
+            System.out.println("Ingrese el número de empleado (6 dígitos):");
+            codigoEmpleado = scanner.nextLine();
+
+            // Validar que el formato del código de empleado sea correcto (6 dígitos)
+            if (!validarFormatoCodigoEmpleado(codigoEmpleado)) {
+                System.out.println("Formato de código de empleado incorrecto. Debe tener 6 dígitos.");
+            }
+            // Validar que el código de empleado no exista previamente
+            else if (codigoEmpleadoExistente(mecanicos, codigoEmpleado)) {
+                System.out.println("El código de empleado ya existe. Introduzca otro código de empleado.");
+            }
+        } while (!validarFormatoCodigoEmpleado(codigoEmpleado) || codigoEmpleadoExistente(mecanicos, codigoEmpleado)); // Repetir hasta que el formato y el código de empleado sean correctos
+        return codigoEmpleado;
+    }
+
+    // Método para validar el formato del código de empleado (6 dígitos)
+    public static boolean validarFormatoCodigoEmpleado(String codigoEmpleado) {
+        return codigoEmpleado.matches("[0-9]{6}");
+    }
+
+    public static boolean codigoEmpleadoExistente(String[][] mecanicos, String codigoEmpleado) {
+        if (mecanicos != null) { // Verificar si mecanicos no es null
+            for (String[] mecanico : mecanicos) {
+                if (mecanico != null && mecanico[0] != null && mecanico[0].equals(codigoEmpleado)) { // Verificar si mecanico y mecanico[0] no son null
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static String pedirNombreMecanico(Scanner nombre) {
+        System.out.println("Ingrese el nombre del mecánico:");
+        return nombre.nextLine();
+    }
+
+    public static String pedirEstadoMecanico(Scanner estado) {
+        System.out.println("Ingrese el estado del mecánico (ocupado o libre):");
+        return estado.nextLine();
+    }
+
+    public static void guardarMecanico(String[][] mecanicos, String codigoEmpleado, String nombreMecanico, String estadoMecanico) {
+        for (int i = 0; i < mecanicos.length; i++) {
+            if (mecanicos[i][0] == null) {
+                mecanicos[i][0] = codigoEmpleado;
+                mecanicos[i][1] = nombreMecanico;
+                mecanicos[i][2] = estadoMecanico;
+                System.out.println("Nuevo mecánico dado de alta exitosamente.");
+                break;
             }
         }
     }
