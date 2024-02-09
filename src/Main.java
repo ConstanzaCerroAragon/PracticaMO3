@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    Scanner input = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
@@ -12,7 +12,7 @@ public class Main {
 
     // arrays
     public static String[][] vehicles = new String[100][3]; // Array para almacenar los datos de los vehículos
-    public static String[][] clients = new String[100][2]; // Array de clientes
+
     public static String[][] reparaciones = new String[100][3]; // Array para almacenar los datos de las reparaciones
 
 
@@ -27,8 +27,8 @@ public class Main {
             System.out.println("[5] Salir");
             System.out.println("Selecciona una opcion: ");
 
-            if (input.hasNextInt()){
-                menuItem = input.nextInt();
+            if (scanner.hasNextInt()){
+                menuItem = scanner.nextInt();
                 switch (menuItem){
                     case 1:
                         System.out.println("Has dado de alta a un nuevo cliente");
@@ -46,16 +46,16 @@ public class Main {
                         String dniPropietario;
                         do {
                             System.out.print("Introduce la matrícula del vehículo (formato: 4 dígitos seguidos de 3 letras): ");
-                            matricula = input.nextLine();
+                            matricula = scanner.nextLine();
 
                             // Validar el formato de la matrícula utilizando una expresión regular
                             if (!matricula.matches("\\d{4}[a-zA-Z]{3}")) {
                                 System.out.println("Error: El formato de la matrícula es incorrecto.");
                             }
                             System.out.print("Introduce el modelo del vehículo: ");
-                            model = input.nextLine();
+                            model = scanner.nextLine();
                             System.out.print("Introduce el DNI del propietario del vehículo: ");
-                            dniPropietario = input.nextLine();
+                            dniPropietario = scanner.nextLine();
 
                             if (matricula.isEmpty() || model.isEmpty() || dniPropietario.isEmpty()) {
                                 System.out.println("Error: Todos los datos del vehículo son obligatorios.");
@@ -107,7 +107,7 @@ public class Main {
 
                         // Solicitar al usuario que seleccione una matrícula
                         System.out.print("Introduce la matrícula del vehículo para la reparación: ");
-                        matricula = input.nextLine();
+                        matricula = scanner.nextLine();
 
                         // Validar que la matrícula introducida exista en el listado de vehículos
                         boolean matriculaExistente = false;
