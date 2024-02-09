@@ -97,6 +97,49 @@ public class Main {
 
 
                     case 4:
+                        // Mostrar el listado de matrículas de vehículos dados de alta
+                        System.out.println("Listado de matrículas de vehículos dados de alta:");
+                        for (int i = 0; i < vehicles.length; i++) {
+                            if (vehicles[i][0] != null) {
+                                System.out.println(vehicles[i][0]);
+                            }
+                        }
+
+                        // Solicitar al usuario que seleccione una matrícula
+                        System.out.print("Introduce la matrícula del vehículo para la reparación: ");
+                        matricula = input.nextLine();
+
+                        // Validar que la matrícula introducida exista en el listado de vehículos
+                        boolean matriculaExistente = false;
+                        for (int i = 0; i < vehicles.length; i++) {
+                            if (vehicles[i][0] != null && vehicles[i][0].equals(matricula)) {
+                                matriculaExistente = true;
+                                break;
+                            }
+                        }
+
+                        if (!matriculaExistente) {
+                            System.out.println("Error: La matrícula introducida no corresponde a ningún vehículo.");
+                            return;
+                        }
+
+                        // Encontrar el primer mecánico libre
+                        String codiMecanic = "";
+
+                        // Establecer el estado de la reparación
+                        String estadoReparacion = "en curso";
+
+                        // Guardar la información de la reparación en algún lugar (en este caso, el array de reparaciones)
+                        for (int i = 0; i < reparaciones.length; i++) {
+                            if (reparaciones[i][0] == null) {
+                                reparaciones[i][0] = matricula;
+                                reparaciones[i][1] = codiMecanic;
+                                reparaciones[i][2] = estadoReparacion;
+                                System.out.println("Reparación registrada correctamente.");
+                                break;
+                            }
+                        }
+                        break;
 
                     case 5:
                         System.out.println("Saliedo...");
