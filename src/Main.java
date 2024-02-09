@@ -2,15 +2,20 @@ import java.util.Scanner;
 
 public class Main {
 
-            Scanner input = new Scanner(System.in);
+            public static Scanner input = new Scanner(System.in);
+            public static String[][] clientes = new String[100][2];
+            public static String[][] mecanicos = new String[100][3];
 
             public static void main(String[] args) {
 
                 Main main = new Main();
                 main.init();
             }
+            // Declaración del array de clientes
+
 
             public void init(){
+
                 int menuItem = 0;
                 do {
                     System.out.println("TALLER DE REPARACIONDE VEHICULOS");
@@ -23,43 +28,34 @@ public class Main {
 
                     if (input.hasNextInt()){
                         menuItem = input.nextInt();
+                        input.nextLine();
+                        String dni;
                         switch (menuItem){
 
                             case 1:
-                                // Declaración del array de clientes
-                                String[][] clientes = new String[100][2];
-
-                                Scanner Scanner = new Scanner(System.in);
-
                                 //Llama al Metodo para pedir el dni y validarlo
-                                String dni;
+                                // String dni;
                                 do {
-                                    dni = pedirDNIAUsuario(Scanner);
+                                    //dni = input.nextLine();
+                                    dni = pedirDNIAUsuario();
                                     if (!validarFormatoDNI(dni)) {
                                         System.out.println("El formato del DNI no es válido. Debe ser de 8 dígitos seguidos de 1 letra.");
                                     }
                                 } while (!validarFormatoDNI(dni));
 
+
                                 // Pedir al usuario que ingrese el nombre del nuevo cliente
-                                String nuevoNombre = pedirNombreAUsuario(Scanner);
+                                String nuevoNombre = pedirNombreAUsuario(input);
 
                                 // Agregar el nuevo cliente al array
                                 agregarCliente(clientes, dni, nuevoNombre);
 
                                 // Mostrar todos los clientes almacenados
                                 mostrarClientes(clientes);
-
                                 break;
 
                             case 2:
-
-                                // Declaración del array de clientes
-                                String[][] mecanicos = new String[100][3];
-
-                                Scanner = new Scanner(System.in);
-
-                                altaMecanico(Scanner, mecanicos);
-
+                                altaMecanico(input, mecanicos);
                                 break;
 
                             case 3:
@@ -100,16 +96,16 @@ public class Main {
         return dni.matches("[0-9]{8}[a-zA-Z]");
     }
 
+
     /**
      * Pide el DNI al usuario
      *
-     * @param dni1 Capta el numero ingresado
-     *
      * @return Capta el DNI ingresado
      */
-    public static String pedirDNIAUsuario(Scanner dni1) {
+    public static String pedirDNIAUsuario() {
         System.out.println("Ingrese el DNI del cliente (8 dígitos seguidos de 1 letra):");
-        return dni1.nextLine();
+        String dni = input.nextLine();
+        return dni;
     }
 
     /**
