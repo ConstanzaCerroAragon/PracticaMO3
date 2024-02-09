@@ -14,7 +14,12 @@ public class Main {
     public static String[][] vehicles = new String[100][3]; // Array para almacenar los datos de los vehículos
 
     public static String[][] reparaciones = new String[100][3]; // Array para almacenar los datos de las reparaciones
+    //Variables
+    // Encontrar el primer mecánico libre
+    String codiMecanic = "";
 
+    // Establecer el estado de la reparación
+    String estadoReparacion = "en curso";
 
     public void init(){
         int menuItem = 0;
@@ -94,13 +99,11 @@ public class Main {
                             }
                         }
 
-
-
-
                     case 4:
                         // Mostrar el listado de matrículas de vehículos dados de alta
                         System.out.println("Listado de matrículas de vehículos dados de alta:");
                         for (int i = 0; i < vehicles.length; i++) {
+
                             if (vehicles[i][0] != null) {
                                 System.out.println(vehicles[i][0]);
                             }
@@ -124,13 +127,7 @@ public class Main {
                             return;
                         }
 
-                        // Encontrar el primer mecánico libre
-                        String codiMecanic = "";
-
-                        // Establecer el estado de la reparación
-                        String estadoReparacion = "en curso";
-
-                        // Guardar la información de la reparación en algún lugar (en este caso, el array de reparaciones)
+                        // Array de reparaciones
                         for (int i = 0; i < reparaciones.length; i++) {
                             if (reparaciones[i][0] == null) {
                                 reparaciones[i][0] = matricula;
@@ -141,8 +138,25 @@ public class Main {
                             }
                         }
                         break;
-
                     case 5:
+                        boolean reparacionExistente=false;
+                        for (int i = 0; i < reparaciones.length; i++) {
+                            for (int j = 0; j < reparaciones[i].length; j++) {
+                                if (reparaciones[i][j] != null && !reparaciones[i][j].isEmpty()) {
+                                    matriculaExistente = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (reparacionExistente=false) {
+                            System.out.println("No hay vehículos con reparacion en curso");
+                            return;
+                        } else {
+
+                        }
+
+
+                    case 6:
                         System.out.println("Saliedo...");
                         break;
                     default:
