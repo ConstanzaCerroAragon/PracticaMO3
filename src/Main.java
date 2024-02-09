@@ -24,7 +24,8 @@ public class Main {
             System.out.println("[2] Dar de alta a nuevo mecanico");
             System.out.println("[3] Introducir nuevo Vehiculo");
             System.out.println("[4] Crear fichas e nueva reparacion");
-            System.out.println("[5] Salir");
+            System.out.println("[5] Modificar la reparacion");
+            System.out.println("[6] Salir");
             System.out.println("Selecciona una opcion: ");
 
             if (scanner.hasNextInt()){
@@ -150,10 +151,10 @@ public class Main {
             }else{
                 System.out.println("Opción no vàlida");
             }
-            input.nextLine();
+            scanner.nextLine();
             System.out.println("");
 
-        }while(menuItem!=5);
+        }while(menuItem!=6);
 
     }
     //insert code here
