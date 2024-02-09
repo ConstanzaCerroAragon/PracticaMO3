@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
-
-    Scanner scanner = new Scanner(System.in);
+    public static Scanner Scanner = new Scanner(System.in);
+    public static String[][] vehicles = new String[100][3]; // Array para almacenar los datos de los vehículos
+    public static String[][] reparaciones = new String[100][3]; // Array para almacenar los datos de las reparaciones
 
     public static void main(String[] args) {
 
@@ -10,10 +11,6 @@ public class Main {
         main.init();
     }
 
-    // arrays
-    public static String[][] vehicles = new String[100][3]; // Array para almacenar los datos de los vehículos
-
-    public static String[][] reparaciones = new String[100][3]; // Array para almacenar los datos de las reparaciones
     //Variables
     // Encontrar el primer mecánico libre
     String codiMecanic = "";
@@ -33,8 +30,8 @@ public class Main {
             System.out.println("[6] Salir");
             System.out.println("Selecciona una opcion: ");
 
-            if (scanner.hasNextInt()){
-                menuItem = scanner.nextInt();
+            if (Scanner.hasNextInt()){
+                menuItem = Scanner.nextInt();
                 switch (menuItem){
                     case 1:
                         System.out.println("Has dado de alta a un nuevo cliente");
@@ -52,16 +49,16 @@ public class Main {
                         String dniPropietario;
                         do {
                             System.out.print("Introduce la matrícula del vehículo (formato: 4 dígitos seguidos de 3 letras): ");
-                            matricula = scanner.nextLine();
+                            matricula = Scanner.nextLine();
 
                             // Validar el formato de la matrícula utilizando una expresión regular
                             if (!matricula.matches("\\d{4}[a-zA-Z]{3}")) {
                                 System.out.println("Error: El formato de la matrícula es incorrecto.");
                             }
                             System.out.print("Introduce el modelo del vehículo: ");
-                            model = scanner.nextLine();
+                            model = Scanner.nextLine();
                             System.out.print("Introduce el DNI del propietario del vehículo: ");
-                            dniPropietario = scanner.nextLine();
+                            dniPropietario = Scanner.nextLine();
 
                             if (matricula.isEmpty() || model.isEmpty() || dniPropietario.isEmpty()) {
                                 System.out.println("Error: Todos los datos del vehículo son obligatorios.");
@@ -78,8 +75,8 @@ public class Main {
 
                         // Comprobación de si existe el DNI del propietario
                         boolean dniValido = false;
-                        for (int i = 0; i < clients.length; i++) {
-                            if (clients[i][0] != null && dniPropietario.matches(clients[i][0])) {
+                        for (int i = 0; i < clientes.length; i++) {
+                            if (clientes[i][0] != null && dniPropietario.matches(clientes[i][0])) {
                                 dniValido = true;
                                 break;
                             }
@@ -111,7 +108,7 @@ public class Main {
 
                         // Solicitar al usuario que seleccione una matrícula
                         System.out.print("Introduce la matrícula del vehículo para la reparación: ");
-                        matricula = scanner.nextLine();
+                        matricula = Scanner.nextLine();
 
                         // Validar que la matrícula introducida exista en el listado de vehículos
                         boolean matriculaExistente = false;
@@ -152,9 +149,26 @@ public class Main {
                             System.out.println("No hay vehículos con reparacion en curso");
                             return;
                         } else {
-
+                            for (int i = 0; i < reparaciones.length; i++) {
+                                System.out.println (reparaciones[i][2]);
+                            }
+                            System.out.println();
                         }
+                        System.out.println("Introduce el número de filas de la matrícula que quieres modificar el estado");
+                        int fila = Scanner.nextInt();
 
+                        if (fila < 0 || fila >= reparaciones.length) {
+                            System.out.println("Coordenadas fuera de rango.");
+                            return;
+                        }
+                        Scanner.nextLine();
+
+                        System.out.print("Introduce el nuevo valor: ");
+                        String nuevoValor = Scanner.nextLine();
+
+                        reparaciones[fila][2] = nuevoValor;
+
+                        System.out.println("Dato modificado correctamente.");
 
                     case 6:
                         System.out.println("Saliedo...");
@@ -165,7 +179,7 @@ public class Main {
             }else{
                 System.out.println("Opción no vàlida");
             }
-            scanner.nextLine();
+            Scanner.nextLine();
             System.out.println("");
 
         }while(menuItem!=6);
