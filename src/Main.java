@@ -1,3 +1,11 @@
+/**
+ * Proyecto: Practica Taller de reparacion de vehiculos
+ * Integrantes del grupo:
+ * - Constanza_Sofia_Cerro_Aragon
+ * -Satenik_Avetisyan
+ * Repositorio del proyecto: https://github.com/ConstanzaCerroAragon/PracticaMO3.git
+ */
+
 import java.util.Scanner;
 
 public class Main {
@@ -274,7 +282,6 @@ public class Main {
             }
         }
     }
-
 
 
     //CASE 2: DAR DE ALTA NUEVO MECANICO
