@@ -279,6 +279,12 @@ public class Main {
 
     //CASE 2: DAR DE ALTA NUEVO MECANICO
 
+    /**
+     * Metodo general que engloba cada metodo
+     *
+     * @param scanner Objeto que guarda de cada metodo para generar la matriz
+     * @param mecanicos matriz donde se guardan los datos
+     */
     public static void altaMecanico(Scanner scanner, String[][] mecanicos) {
 
         String codigoEmpleado = pedirCodigoEmpleado(scanner, mecanicos);
@@ -287,11 +293,19 @@ public class Main {
         guardarMecanico(mecanicos, codigoEmpleado, nombreMecanico, estadoMecanico);
     }
 
-    public static String pedirCodigoEmpleado(Scanner scanner, String[][] mecanicos) {
+    /**
+     * Solicita y valida el codigo del empleado para sean 6 digitos y no se repita
+     *
+     * @param codigo numeros identificadores
+     * @param mecanicos matriz donde se guardan los datos
+     *
+     * @return numero identificador, guardado en la matriz
+     */
+    public static String pedirCodigoEmpleado(Scanner codigo, String[][] mecanicos) {
         String codigoEmpleado;
         do {
             System.out.println("Ingrese el número de empleado (6 dígitos):");
-            codigoEmpleado = scanner.nextLine();
+            codigoEmpleado = codigo.nextLine();
 
             // Validar que el formato del código de empleado sea correcto (6 dígitos)
             if (!validarFormatoCodigoEmpleado(codigoEmpleado)) {
@@ -305,11 +319,25 @@ public class Main {
         return codigoEmpleado;
     }
 
-    // Método para validar el formato del código de empleado (6 dígitos)
+    /**
+     * Validar el formato del código de empleado (6 dígitos)
+     *
+     * @param codigoEmpleado
+     *
+     * @return codigo verificado
+     */
     public static boolean validarFormatoCodigoEmpleado(String codigoEmpleado) {
         return codigoEmpleado.matches("[0-9]{6}");
     }
 
+    /**
+     * Validar el si el codigo del mecanico ya existe
+     *
+     * @param mecanicos Matriz de datos
+     * @param codigoEmpleado
+     *
+     * @return Codigo no existente
+     */
     public static boolean codigoEmpleadoExistente(String[][] mecanicos, String codigoEmpleado) {
         if (mecanicos != null) { // Verificar si mecanicos no es null
             for (String[] mecanico : mecanicos) {
@@ -321,16 +349,38 @@ public class Main {
         return false;
     }
 
+    /**
+     * Capta el nombre de mecanico
+     *
+     * @param nombre
+     *
+     * @return el nombre del mecanico
+     */
     public static String pedirNombreMecanico(Scanner nombre) {
         System.out.println("Ingrese el nombre del mecánico:");
         return nombre.nextLine();
     }
 
+    /**
+     * Estado del mecanico
+     *
+     * @param estado
+     *
+     * @return si el mecanico esta ocupado o libre
+     */
     public static String pedirEstadoMecanico(Scanner estado) {
         System.out.println("Ingrese el estado del mecánico (ocupado o libre):");
         return estado.nextLine();
     }
 
+    /**
+     * Muestra la matriz con todos datos, a travez de un for
+     *
+     * @param mecanicos Matriz recorrida
+     * @param codigoEmpleado
+     * @param nombreMecanico
+     * @param estadoMecanico
+     */
     public static void guardarMecanico(String[][] mecanicos, String codigoEmpleado, String nombreMecanico, String estadoMecanico) {
         for (int i = 0; i < mecanicos.length; i++) {
             if (mecanicos[i][0] == null) {
