@@ -40,18 +40,13 @@ public class Main {
                         switch (menuItem) {
 
                             case 1:
-                                //Llama al Metodo para pedir el dni y validarlo
-                                do {
-                                    //dni = input.nextLine();
-                                    dni = pedirDNIAUsuario();
-                                    if (!validarFormatoDNI(dni)) {
-                                        System.out.println("El formato del DNI no es válido. Debe ser de 8 dígitos seguidos de 1 letra.");
-                                    }
-                                } while (!validarFormatoDNI(dni));
-
-                                String nuevoNombre = pedirNombreAUsuario(input);
-                                agregarCliente(clientes, dni, nuevoNombre);
-                                mostrarClientes(clientes);
+                                dni = pedirDNIAUsuario();
+                                String nuevoNombre;
+                                if (dni != null) {
+                                    nuevoNombre = pedirNombreAUsuario(input);
+                                    agregarCliente(clientes, dni, nuevoNombre);
+                                    mostrarClientes(clientes);
+                                }
                                 break;
 
                             case 2:
@@ -102,7 +97,8 @@ public class Main {
         System.out.println("Selecciona una opción: ");
     }
 
-    //CASE 1: DAR DE ALTA NUEVO EMPLEADO
+
+    //CASE 1: DAR DE ALTA NUEVO EMPLEADO (CONSTANZA)
     /**
      * Validar el formato del DNI
      *
@@ -120,9 +116,15 @@ public class Main {
      * @return Capta el DNI ingresado
      */
     public static String pedirDNIAUsuario() {
-        System.out.println("Ingrese el DNI del cliente (8 dígitos seguidos de 1 letra):");
-        String dni = input.nextLine();
-        return dni;
+        String dni;
+        do {
+            System.out.println("Ingrese el DNI del cliente (8 dígitos seguidos de 1 letra):");
+            dni = input.nextLine();
+            if (!validarFormatoDNI(dni)) {
+                System.out.println("El formato del DNI no es válido. Debe ser de 8 dígitos seguidos de 1 letra.");
+            }
+        }while (!validarFormatoDNI(dni));
+            return dni;
     }
 
     /**
@@ -171,19 +173,19 @@ public class Main {
     }
 
 
-    //CASE 2: DAR DE ALTA NUEVO MECANICO
 
+    //CASE 2: DAR DE ALTA NUEVO MECANICO (CONSTANZA)
     /**
      * Metodo general que engloba cada metodo
      *
-     * @param scanner Objeto que guarda de cada metodo para generar la matriz
+     * @param mecanico Objeto que guarda de cada metodo para generar la matriz
      * @param mecanicos matriz donde se guardan los datos
      */
-    public static void altaMecanico(Scanner scanner, String[][] mecanicos) {
+    public static void altaMecanico(Scanner mecanico, String[][] mecanicos) {
 
-        String codigoEmpleado = pedirCodigoEmpleado(scanner, mecanicos);
-        String nombreMecanico = pedirNombreMecanico(scanner);
-        String estadoMecanico = pedirEstadoMecanico(scanner);
+        String codigoEmpleado = pedirCodigoEmpleado(mecanico, mecanicos);
+        String nombreMecanico = pedirNombreMecanico(mecanico);
+        String estadoMecanico = pedirEstadoMecanico(mecanico);
         guardarMecanico(mecanicos, codigoEmpleado, nombreMecanico, estadoMecanico);
     }
 
@@ -263,8 +265,15 @@ public class Main {
      * @return si el mecanico esta ocupado o libre
      */
     public static String pedirEstadoMecanico(Scanner estado) {
-        System.out.println("Ingrese el estado del mecánico (ocupado o libre):");
-        return estado.nextLine();
+        String estadoMecanico;
+        do {
+            System.out.println("Ingrese el estado del mecánico (ocupado o libre):");
+            estadoMecanico = input.nextLine();
+            if (!estadoMecanico.equalsIgnoreCase("ocupado") && !estadoMecanico.equalsIgnoreCase("libre")) {
+                System.out.println("Estado del mecánico no válido. Debe ser 'ocupado' o 'libre'.");
+            }
+        }while (!estadoMecanico.equalsIgnoreCase("ocupado") && !estadoMecanico.equalsIgnoreCase("libre"));
+        return estadoMecanico;
     }
 
     /**
@@ -286,7 +295,10 @@ public class Main {
             }
         }
     }
-    // CASE 3: INTRODUCIR NUEVO VEHICULO
+
+
+
+    // CASE 3: INTRODUCIR NUEVO VEHICULO (SATENIK)
     public static void nuevoVehiculo(Scanner input, String[][] vehicles,String[][] clientes) {
 
         agregarNuevoVehiculo(input, clientes, vehicles);
@@ -362,6 +374,7 @@ public class Main {
         return dniPropietario;
     }
 
+
     // CASE 4: Reparacion
     public static void Reparaciones(Scanner input, String[][] reparaciones,String[][] vehicles) {
         String matricula = obtenerMatricula(input, vehicles);
@@ -413,7 +426,10 @@ public class Main {
             }
         }
     }
-    //CASE 5:
+
+
+
+    //CASE 5: (CONSTANZA)
     public static void modificar(Scanner input,String[][] reparaciones,String[][] clientes) {
         boolean reparacionExistente = verificarReparacionEnCurso(reparaciones);
         if (!reparacionExistente) {
