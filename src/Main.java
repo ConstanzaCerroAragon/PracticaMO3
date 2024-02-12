@@ -31,13 +31,7 @@ public class Main {
 
                 int menuItem = 0;
                 do {
-                    System.out.println("TALLER DE REPARACIONDE VEHICULOS");
-                    System.out.println("[1] Dar de alta al cliente");
-                    System.out.println("[2] Dar de alta a nuevo mecanico");
-                    System.out.println("[3] Introducir nuevo Vehiculo");
-                    System.out.println("[4] Crear fichas e nueva reparacion");
-                    System.out.println("[5] Salir");
-                    System.out.println("Selecciona una opcion: ");
+                    menuItem = elegirOpcion(input);
 
                     if (input.hasNextInt()) {
                         menuItem = input.nextInt();
@@ -213,6 +207,22 @@ public class Main {
 
                 } while (menuItem != 6);
             }
+
+
+    //METODO OPCIONES
+
+    public static int elegirOpcion(Scanner input) {
+        System.out.println("TALLER DE REPARACIONDE VEHICULOS");
+        System.out.println("[1] Dar de alta al cliente");
+        System.out.println("[2] Dar de alta a nuevo mecanico");
+        System.out.println("[3] Introducir nuevo Vehiculo");
+        System.out.println("[4] Crear fichas e nueva reparacion");
+        System.out.println("[5] Salir");
+        System.out.println("Selecciona una opcion: ");
+
+        return input.nextInt();
+    }
+
 
     //CASE 1: DAR DE ALTA NUEVO EMPLEADO
 
