@@ -204,7 +204,6 @@ public class Main {
 
 
     //METODO PARA MENU
-
     /**
      * Muestra las ocpiones del menu
      */
@@ -219,7 +218,6 @@ public class Main {
     }
 
     //CASE 1: DAR DE ALTA NUEVO EMPLEADO
-
     /**
      * Validar el formato del DNI
      *
@@ -398,7 +396,7 @@ public class Main {
                 mecanicos[i][0] = codigoEmpleado;
                 mecanicos[i][1] = nombreMecanico;
                 mecanicos[i][2] = estadoMecanico;
-                System.out.println("Nuevo mecánico dado de alta exitosamente.");
+                System.out.println("Nuevo mecánico dado de alta exitosamente." + "\n\nPresione enter para volver al menu, y elegir su nueva opcion!");
                 break;
             }
         }
