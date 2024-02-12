@@ -31,7 +31,7 @@ public class Main {
 
                 int menuItem = 0;
                 do {
-                    menuItem = elegirOpcion(input);
+                    mostrarMenu();
 
                     if (input.hasNextInt()) {
                         menuItem = input.nextInt();
@@ -41,7 +41,6 @@ public class Main {
 
                             case 1:
                                 //Llama al Metodo para pedir el dni y validarlo
-                                // String dni;
                                 do {
                                     //dni = input.nextLine();
                                     dni = pedirDNIAUsuario();
@@ -50,14 +49,8 @@ public class Main {
                                     }
                                 } while (!validarFormatoDNI(dni));
 
-
-                                // Pedir al usuario que ingrese el nombre del nuevo cliente
                                 String nuevoNombre = pedirNombreAUsuario(input);
-
-                                // Agregar el nuevo cliente al array
                                 agregarCliente(clientes, dni, nuevoNombre);
-
-                                // Mostrar todos los clientes almacenados
                                 mostrarClientes(clientes);
                                 break;
 
@@ -209,20 +202,21 @@ public class Main {
             }
 
 
-    //METODO OPCIONES
 
-    public static int elegirOpcion(Scanner input) {
+    //METODO PARA MENU
+
+    /**
+     * Muestra las ocpiones del menu
+     */
+    public void mostrarMenu() {
         System.out.println("TALLER DE REPARACIONDE VEHICULOS");
         System.out.println("[1] Dar de alta al cliente");
-        System.out.println("[2] Dar de alta a nuevo mecanico");
-        System.out.println("[3] Introducir nuevo Vehiculo");
+        System.out.println("[2] Dar de alta a nuevo mecánico");
+        System.out.println("[3] Introducir nuevo Vehículo");
         System.out.println("[4] Crear fichas e nueva reparacion");
         System.out.println("[5] Salir");
-        System.out.println("Selecciona una opcion: ");
-
-        return input.nextInt();
+        System.out.println("Selecciona una opción: ");
     }
-
 
     //CASE 1: DAR DE ALTA NUEVO EMPLEADO
 
@@ -286,9 +280,9 @@ public class Main {
         System.out.println("Lista de clientes:");
         for (int i = 0; i < clientes.length; i++) {
             if (clientes[i][0] != null && clientes[i][1] != null) {
-                System.out.println("Cliente " + (i + 1) + ": DNI = " + clientes[i][0] + ", Nombre = " + clientes[i][1]);
+                System.out.println("Cliente " + (i + 1) + ": DNI = " + clientes[i][0] + ", Nombre = " + clientes[i][1] + "\n\nPresione enter para volver al menu, y elegir su nueva opcion!");
             } else {
-                break; // Detener la iteración si se alcanza una posición vacía
+                break; // Detener el for si hay una posición vacía
             }
         }
     }
